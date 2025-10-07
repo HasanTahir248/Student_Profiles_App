@@ -8,7 +8,7 @@ class StudentViewmodel {
   List<Student> get students => _students;
   
   Future<void> loadstudents() async {
-    final String response = await rootBundle.loadString('assets/data.json');
+    final String response = await rootBundle.loadString('assests/data.json');
     final data = jsonDecode(response) as List<dynamic>;
     _students = data.map((json) => Student.fromJson(json)).toList();
   } 
