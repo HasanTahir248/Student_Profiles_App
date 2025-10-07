@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "Ali",
+    "Age": "22",
+    "Course": "AI",
+    "description": "A student passionate about artificial intelligence and machine learning."
+  },
+  {
+    "Name": "Hassan",
+    "Age": "23",
+    "Course": "Quantum Computing",   
+    "description": "Enthusiastic about the future of computing and quantum mechanics."
+  },
+  {
+    "Name": "Mohammed",
+    "Age": "20",
+    "Course": "Quran",
+    "description": "Dedicated to studying and understanding the Quran."
+  }
+]
