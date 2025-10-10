@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import '../models/home_model.dart';
+import 'package:provider/provider.dart';
 
 class HomeViewmodel {
   List<Home> _home = [];
