@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../viewmodels/student_viewmodel.dart';
 import '../models/student_model.dart';
+import 'package:provider/provider.dart';
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
