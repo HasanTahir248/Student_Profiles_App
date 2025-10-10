@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'views/home_page.dart';
+import 'package:provider/provider.dart';
+import 'viewmodels/student_viewmodel.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => StudentViewmodel()..loadstudents(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
