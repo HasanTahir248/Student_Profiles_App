@@ -4,49 +4,30 @@ import '../models/student_model.dart';
 import 'package:provider/provider.dart';
 
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
   
   @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  final StudentViewmodel _studentViewmodel = StudentViewmodel();
-  bool _isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadStudents();
-  }
-
-  Future<void> _loadStudents() async {
-    await _studentViewmodel.loadstudents();
-    setState(() {
-      _isLoading = false;
-    });
-  }
-
-  @override
   Widget build(BuildContext context){
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        title: const Text('Student Profiles'),
-        centerTitle: false,
-        backgroundColor: Colors.deepPurple,
-        titleTextStyle: const TextStyle(
-          color: Colors.white,
-        ),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
+    return Consumer<StudentViewmodel>(
+      builder: (context, viewModel, child){
+        return Scaffold(
+          extendBodyBehindAppBar: true,
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: const Text('Student Profiles'),
+            centerTitle: false,
+            backgroundColor: Colors.deepPurple,
+            titleTextStyle: const TextStyle(
+              color: Colors.white,
+            ),
+            shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20),
+            ),
           ),
         ),
-      ),
-      body: Container(
+        body: Container(
          width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -55,10 +36,12 @@ class _ProfilePageState extends State<ProfilePage> {
             end: Alignment.bottomCenter,
             ),
           ),
-          child: _isLoading 
+          child: viewModel.students.isEmpty
           ? const Center(child: CircularProgressIndicator())
-          : _buildStudentList(_studentViewmodel.students),
+          : _buildStudentList(viewModel.students),
           ),
+        );
+      },
     );
   }
   Widget _buildStudentList(List<Student> students){

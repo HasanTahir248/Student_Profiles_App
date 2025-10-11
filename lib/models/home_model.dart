@@ -18,6 +18,5 @@ class Home{
       ending: json['ending'],
     ); 
   }
-
 }
 

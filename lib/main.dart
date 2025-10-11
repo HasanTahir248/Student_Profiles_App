@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'views/home_page.dart';
 import 'package:provider/provider.dart';
 import 'viewmodels/student_viewmodel.dart';
+import 'viewmodels/home_viewmodel.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => StudentViewmodel()..loadstudents(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create:(context) => HomeViewmodel()..loadHomeData(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => StudentViewmodel()..loadstudents(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
