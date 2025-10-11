@@ -2,58 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:student_profiles/views/profile.dart';
 import '../viewmodels/home_viewmodel.dart';
 import '../widgets/button.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget{
+class HomePage extends StatelessWidget{
   const HomePage({Key? key}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+ @override
+ Widget build(BuildContext context){
+  return Consumer<HomeViewmodel>(
+    builder: (context, viewModel, child){
+      if(viewModel.homeList.isEmpty){
+        return Scaffold(
+          backgroundColor: Color(0xFF6A1B9A),
+          body: Center(
+            child: CircularProgressIndicator(color: Colors.white),
+          ),
+        );
+      }
+      final homeData = viewModel.homeList.first;
 
-class _HomePageState extends State<HomePage>{
-  final HomeViewmodel _homeViewmodel = HomeViewmodel();
-  bool _isLoading = true;
-
-  @override
-  void initState(){
-    super.initState();
-    _loadHome();
-  }
-
-  Future<void> _loadHome() async {
-    await _homeViewmodel.loadHomeData();
-    setState(() {
-      _isLoading = false;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context){
-    if(_isLoading){
-      return const Scaffold(
-        backgroundColor: Color(0xFF6A1B9A),
-        body: Center(
-          child: CircularProgressIndicator(color: Colors.white),
-        ),
-      );
-    }
-    final homeData= _homeViewmodel.homeList.first;
-
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        title: Text( homeData.title ),
-        centerTitle: false,
-        backgroundColor: Colors.deepPurple,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20)
+      return Scaffold(
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: Text( homeData.title ),
+          centerTitle: false,
+          backgroundColor: Colors.deepPurple,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20)
+            ),
           ),
         ),
-      ),
-
-      body: Container(
+        body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -107,12 +88,11 @@ class _HomePageState extends State<HomePage>{
                 )
               ),
             ],
-          )
-        )
+          ),
+        ),
       ),
-    );
-  }
-
-
-
+      );
+    },
+  );
+ }
 }
