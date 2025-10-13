@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
-import '../models/home_model.dart';
+import '../../models/home_model/home_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewmodel extends ChangeNotifier {

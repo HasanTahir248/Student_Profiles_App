@@ -1,6 +1,6 @@
 class Student{
   final String name;
-  final int age;
+  final String age;
   final String course;
   final String description;
 
@@ -15,10 +15,10 @@ class Student{
 // convert JSON to Student object
  factory  Student.fromJson(Map<String, dynamic> json){
   return Student(
-    name: json['name'],
-    age: json['age'],
-    course: json['course'],
-    description: json['description'],
+    name: json['Name'] ?? 'Unknown Name',
+    age: json['Age'] ?? 'Unknown value',
+    course: json['Course'] ?? 'Unknown Value',
+    description: json['description'] ?? 'unknown Value',
   );
  }
 
@@ -26,8 +26,8 @@ class Student{
   Map<String, dynamic> toJson(){
     return {
       'name': name,
-      'age': age,
-      'course': course,
+      'Age': age,
+      'Course': course,
       'description': description,
     };
   }

@@ -13,9 +13,9 @@ class Home{
 
   factory Home.fromJson(Map<String, dynamic> json){
     return Home(
-      title: json['title'],
-      description: json['description'],
-      ending: json['ending'],
+      title: json['title'] ?? 'Unknow title',
+      description: json['description'] ?? 'No Description',
+      ending: json['ending'] ?? 'Default version!! Will be updating soon!',
     ); 
   }
 }

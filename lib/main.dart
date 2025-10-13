@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'views/home_page.dart';
+import 'views/home_view/home_page.dart';
 import 'package:provider/provider.dart';
-import 'viewmodels/student_viewmodel.dart';
-import 'viewmodels/home_viewmodel.dart';
+import 'viewmodels/student_vm/student_viewmodel.dart';
+import 'viewmodels/home_vm/home_viewmodel.dart';
 
 void main() {
   runApp(

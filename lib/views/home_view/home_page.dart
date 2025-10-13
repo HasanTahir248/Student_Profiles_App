@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:student_profiles/views/profile.dart';
-import '../viewmodels/home_viewmodel.dart';
-import '../widgets/button.dart';
+import 'package:student_profiles/views/student_view/profile_page.dart';
+import '../../viewmodels/home_vm/home_viewmodel.dart';
+import '../../widgets/button.dart';
 import 'package:provider/provider.dart';
+import '../../widgets/appbar.dart';
 
 class HomePage extends StatelessWidget{
   const HomePage({Key? key}) : super(key: key);
@@ -24,17 +25,8 @@ class HomePage extends StatelessWidget{
       return Scaffold(
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Text( homeData.title ),
-          centerTitle: false,
-          backgroundColor: Colors.deepPurple,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20)
-            ),
-          ),
-        ),
-        body: Container(
+        appBar: CustomAppBar(title: homeData.title),
+      body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(

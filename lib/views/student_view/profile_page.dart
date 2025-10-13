@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import '../viewmodels/student_viewmodel.dart';
-import '../models/student_model.dart';
+import '../../viewmodels/student_vm/student_viewmodel.dart';
+import '../../models/student_model/student_model.dart';
 import 'package:provider/provider.dart';
+import '../../widgets/appbar.dart';
+import '../../viewmodels/home_vm/home_viewmodel.dart';
+
 
 
 class ProfilePage extends StatelessWidget {
@@ -9,36 +12,51 @@ class ProfilePage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context){
+    final homeViewModel = Provider.of<HomeViewmodel>(context, listen: false);
+    final homeData = homeViewModel.homeList.isNotEmpty ? homeViewModel.homeList.first : null;
+
     return Consumer<StudentViewmodel>(
       builder: (context, viewModel, child){
         return Scaffold(
           extendBodyBehindAppBar: true,
           backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: const Text('Student Profiles'),
-            centerTitle: false,
-            backgroundColor: Colors.deepPurple,
-            titleTextStyle: const TextStyle(
-              color: Colors.white,
-            ),
-            shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
-            ),
-          ),
-        ),
+          appBar: const CustomAppBar(title: "Student Profiles"),
         body: Container(
          width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [ Color(0xFF6A1B9A), Color(0xFF8E24AA)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [ Color(0xFF6A1B9A), Color(0xFF8E24AA)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
           ),
-          child: viewModel.students.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : _buildStudentList(viewModel.students),
+          child: SafeArea(
+
+            child: Column(
+              children: [
+                if (viewModel.students.isEmpty)
+                  const Expanded(
+                    child: Center(child: CircularProgressIndicator(color: Colors.white)),
+                  )
+                else
+                  Expanded(
+                    child: _buildStudentList(viewModel.students),
+                  ),
+                
+                if (homeData != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                  child: Text(
+                    homeData.ending,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  )
+                  ),
+              ],
+            ), 
+          ),
           ),
         );
       },
