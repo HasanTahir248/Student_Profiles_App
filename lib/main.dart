@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
-import 'views/home_view/home_page.dart';
-import 'package:provider/provider.dart';
-import 'viewmodels/student_vm/student_viewmodel.dart';
-import 'viewmodels/home_vm/home_viewmodel.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'features/home/home_page.dart';
+
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create:(context) => HomeViewmodel()..loadHomeData(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => StudentViewmodel()..loadstudents(),
-        ),
-      ],
-      child: const MyApp(),
+    const ProviderScope(
+      child: MyApp(),
     ),
   );
 }
